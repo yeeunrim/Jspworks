@@ -1,0 +1,11 @@
+package bean;
+
+import java.io.Serializable;
+
+public class MemberBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private int id = 2023101;
+	private String name = "임예은";
+}

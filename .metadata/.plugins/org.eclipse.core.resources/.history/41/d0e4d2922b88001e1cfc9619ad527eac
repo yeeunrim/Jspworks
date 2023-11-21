@@ -1,0 +1,16 @@
+package bean;
+
+import java.io.Serializable;
+
+public class LoginBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+    // loginform.jsp의 name과 같게 해야한다.
+	private String uid;
+	private String upwd;
+	
+	final String _uid = "today";
+	final String _upwd = "1234";
+	
+}

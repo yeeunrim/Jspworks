@@ -1,0 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%
+	// HTTP 헤더 정보값 출력
+	String hostValue = request.getHeader("host");
+	String alValue = request.getHeader("accept-language");
+
+	out.println("호스트명: " + hostValue + "<br>");
+	out.println("설정 언어: " + alValue);
+%>

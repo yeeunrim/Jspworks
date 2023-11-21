@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<h2>홀수/짝수를 판별하는 프로그램</h2>
+	
+<% 
+	int num = request.getParameter("num");
+	String result;
+	
+	if(num % 2 == 0){
+		result = "짝수";
+	} else{
+		result = "홀수";
+	}	
+%>
+
+<p>결과는 <%=result %>입니다.</p>

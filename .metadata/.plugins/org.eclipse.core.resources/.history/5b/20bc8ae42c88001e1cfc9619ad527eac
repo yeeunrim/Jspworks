@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<jsp:useBean id="login" class="bean.LoginBean" />
+<jsp:setProperty property="uid" name="login" />
+<jsp:setProperty property="upwd" name="login" />
+
+<!-- setUid(), setUpwd()를 참조함 -->
+<%
+	boolean result = login.checkUser();
+	if(result){
+		out.println("로그인 성공");
+	} else{
+		out.println("로그인 실패");
+	}
+%>
+
