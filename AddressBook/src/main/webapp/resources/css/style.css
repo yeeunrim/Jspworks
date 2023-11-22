@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+/* common */
+#container{width: 80%; margin: 40px auto;}
+h2, h3{text-align: center;}
+p{margin: 10px auto; text-align: center;}
+a{color: dimgray;}
+a:hover{text-decoration: line-through; color: black;}
+
+/* addrForm.jsp */
+#tbl_reg{width: 400px; margin: 0 auto;}
+#tbl_reg, td{border: 1px solid #ccc; border-collapse: collapse; text-align: center;}
+#tbl_reg td{padding: 10px;}
+#tbl_reg input[type="text"]{width: 200px; height: 20px;}
+#tbl_reg select{padding: 5px;}
+
+/* addList.jsp */
+#tbl_list{width: 600px; margin: 0 auto;}
+#tbl_list, th, td{border: 1px solid #ccc; border-collapse: collapse; text-align: center;}
+#tbl_list td, td{padding: 10px;}
+
+/* addrView.jsp */
+#tbl_view{width: 400px; margin: 0 auto;}
+#tbl_view, th, td{border: 1px solid #ccc; border-collapse: collapse; text-align: center;}
+#tbl_view td, td{padding: 10px;}
