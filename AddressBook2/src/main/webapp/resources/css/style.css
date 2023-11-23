@@ -1,0 +1,42 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+
+/* common */
+#container{width: 80%; margin: 40px auto;}
+h2, h3{text-align: center;}
+p{margin: 10px auto; text-align: center;}
+a{color: dimgray;}
+a:hover{text-decoration: line-through; color: black;}
+button{padding: 5px; font-size: 11px; font-family: 'Nanum Myeongjo', serif; 
+	font-weight: bold; background-color: rgb(211, 211, 211);}
+
+/* addrForm.jsp */
+#tbl_reg{width: 400px; margin: 0 auto;}
+#tbl_reg, td{border: 1px solid darkgray; border-collapse: collapse; text-align: center;}
+#tbl_reg td{padding: 10px;}
+#tbl_reg input[type="text"]{width: 200px; height: 20px;}
+#tbl_reg select{padding: 5px;}
+#tbl_reg tr td:nth-of-type(1){background-color: #ccc;}
+#tbl_reg tr td:last-child{background-color: white;}
+
+/* addList.jsp */
+#tbl_list{width: 850px; margin: 0 auto;}
+#tbl_list, th, td{border: 1px solid darkgray; border-collapse: collapse; text-align: center;}
+#tbl_list td, td{padding: 10px;}
+#tbl_list thead tr th{background-color: #ccc; padding: 10px;}
+
+/* addrView.jsp */
+#tbl_view{width: 400px; margin: 0 auto;}
+#tbl_view, th, td{border: 1px solid darkgray; border-collapse: collapse; text-align: center;}
+#tbl_view td, td{padding: 10px;}
+#tbl_view tr td:nth-of-type(1){background-color: #ccc; padding: 10px;}
+#tbl_view tr td:last-child{background-color: white;}
+
+/* loginForm.jsp */
+#tbl_login{width: 400px; margin: 0 auto;}
+#tbl_login, td{border: 1px solid darkgray; border-collapse: collapse; text-align: center;}
+#tbl_login td{padding: 10px;}
+#tbl_login input[type="text"]{width: 200px; height: 20px;}
+#tbl_login select{padding: 5px;}
+#tbl_login tr td:nth-of-type(1){background-color: #ccc;}
+#tbl_login tr td:last-child{background-color: white;}
