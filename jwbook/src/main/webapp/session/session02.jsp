@@ -6,5 +6,6 @@
 	// 강제 형변환(Object -> String)
 	String id = (String)session.getAttribute("userID");
 
-	out.println("설정된 세션의 속성값 : " + id);
+	out.println("설정된 세션의 속성값 : " + id + "<br>");
+	out.println("세션 아이디값 : " + session.getId());
 %>

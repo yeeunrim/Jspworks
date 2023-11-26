@@ -14,7 +14,9 @@
 	<jsp:useBean id="abDAO" class="addressbook.AddrBookDAO" scope="application" />
 	
 	<%
-		abDAO.addAddrBook(addrBook);
+		abDAO.addAddrBook(addrBook); // 주소 추가
+		// 이름으로 세션을 발급함 - 세션 이름(sessionName)
+		session.setAttribute("sessionId", addrBook.getEmail());
 	%>
 
 	<div id="container">

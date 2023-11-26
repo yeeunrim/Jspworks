@@ -12,7 +12,7 @@
 		<h2>AddressBook MainPage</h2>
 		<hr>
 		<h3><a href="addressbook/addrForm.jsp">AddressBook Registration</a></h3>
-		<!-- h3><a href="addressbook/addrList.jsp">AddressBook List</a></h3> -->
+		<h3><a href="addressbook/addrList.jsp">AddressBook List</a></h3>
 		<h3><a href="addressbook/loginForm.jsp">AddressBook Login</a></h3>
 	</div>
 </body>
