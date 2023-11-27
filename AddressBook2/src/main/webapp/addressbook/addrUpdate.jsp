@@ -14,7 +14,7 @@
 	<%
 		// bnum으로 찾은 객체를 생성
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
-		AddrBook addrBook = abDAO.getListAll(bnum);
+		AddrBook addrBook = abDAO.getAddrBook(bnum);
 	%>
 	
 	<div id="container">

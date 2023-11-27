@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <!-- 보안(Security) 설정 -->
+  <security-role>
+  	<role-name>role1</role-name>
+  </security-role>
+  
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>jwbook2</web-resource-name>
+  		<url-pattern>/security/security1.jsp</url-pattern>
+  		<http-method>GET</http-method>
+  	</web-resource-collection>
+  	<auth-constraint>
+		<role-name>role1</role-name>
+  	</auth-constraint>
+  </security-constraint>
+  
+  <!-- 기본 인증 방식 -->
+  <!-- <login-config>
+  	<auth-method>BASIC</auth-method>
+  </login-config> -->
+  
+  <!-- 폼 기반 인증 방식 -->
+  <login-config>
+  	<auth-method>FORM</auth-method>
+  	<form-login-config>
+  		<form-login-page>/security/adminLogin.jsp</form-login-page>
+  		<form-error-page>/security/loginFailed.jsp</form-error-page>
+  	</form-login-config>
+  </login-config>
+</web-app>

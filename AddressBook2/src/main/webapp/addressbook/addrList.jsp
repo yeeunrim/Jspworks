@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="../resources/css/style.css">
 </head>
 <body>
-	<jsp:useBean id="abDAO" class="addressbook.AddrBookDAO" scope="application"></jsp:useBean>
+	<jsp:useBean id="abDAO" class="addressbook.AddrBookDAO" scope="application" />
 	
 	<%
 		// 세션이 없는 경우, 로그인하도록 알림창 띄움

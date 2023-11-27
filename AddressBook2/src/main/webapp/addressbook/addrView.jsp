@@ -13,7 +13,7 @@
 	<%
 		// bnum으로 찾은 객체를 생성
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
-		AddrBook addrBook = abDAO.getListAll(bnum);
+		AddrBook addrBook = abDAO.getAddrBook(bnum);
 	%>
 	<div id="container">
 		<h2>Address Information</h2>
@@ -47,7 +47,7 @@
 				<td colspan="2">
 					<%
 					String sessionId = (String)session.getAttribute("sessionID");
-					if(addrBook.getEmail().equals(sessionId)){
+					if(sessionId.equals(addrBook.getEmail())){
 					%>
 					<a href="addrUpdate.jsp?bnum=<%=addrBook.getBnum() %>">
 						<button type="button">Update</button>

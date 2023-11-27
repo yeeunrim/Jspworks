@@ -86,7 +86,7 @@ public class AddrBookDAO {
 	}
 	
 	// 주소 특정 목록 보기 - Research
-	public AddrBook getListAll(int bnum) {
+	public AddrBook getAddrBook(int bnum) {
 		
 		// db 연결
 		conn = JDBCUtil.getConnection();
