@@ -21,7 +21,7 @@
 		<h2>Address Update</h2>
 		<hr>
 		<form action="addrUpdateProcess.jsp" method="post">
-			<table id="tbl_view">
+			<table id="tbl_update">
 				<tr>
 					<td>Number</td>
 					<td>
@@ -31,7 +31,7 @@
 				<tr>
 					<td>Name</td>
 					<td>
-						<input type="text" name="uesrname" value=<%=addrBook.getUsername() %>>
+						<input type="text" name="username" value=<%=addrBook.getUsername() %>>
 					</td>
 				</tr>
 				<tr>
@@ -49,17 +49,17 @@
 				<tr>
 					<td>Gender</td>
 					<td>
-						<% if(addrBook.getGender().equals("male")){ %>
-						<input type="radio" name="gender" value="male" checked>male
-						<input type="radio" name="gender" value="female">female
+						<% if(addrBook.getGender().equals("Male")){ %>
+						<input type="radio" name="gender" value="Male" checked>Male
+						<input type="radio" name="gender" value="Female">Female
 						<% } else{ %>
-						<input type="radio" name="gender" value="male">male
-						<input type="radio" name="gender" value="female" checked>female
+						<input type="radio" name="gender" value="Male">Male
+						<input type="radio" name="gender" value="Female" checked>Female
 						<% } %>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td colspan="2" id="input_btn">
 						<input type="submit" value="Save">
 						<input type="reset" value="Reset">
 						<a href="addrList.jsp">

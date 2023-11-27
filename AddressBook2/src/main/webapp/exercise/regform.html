@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입 폼 만들기</title>
+<style>
+	body{font-family: Lucida Grande;}
+	h2{border-radius: 5px; background-color: wheat; text-align: center; padding: 15px 0;}
+	p{padding-bottom: 5px;}
+	#regform{padding: 15px 20px; border-radius: 10px; margin: auto; width: 28%; background-color: sandybrown; text-align: left;}
+	button{padding: 5px; background-color: burlywood; font-size: 13px;}
+	
+	#result{text-align: center; margin: 0 auto;}
+	#result h3, #result p{text-align: center;}
+</style>
+<script>
+	function signUp(){
+		alert("정말로 가입하시겠습니까?");
+		document.getElementById("regform").style.display = "none";
+		document.getElementById("rname").innerHTML = document.form1.name.value;
+		document.getElementById("remail").innerHTML = document.form1.email.value;;
+		document.getElementById("result").setAttribute("style", "display: block;", "backgroud-color: Khaki;");
+	}
+</script>
+</head>
+<body>
+	<h2>회원 가입</h2>
+	<hr>
+	<div id="regform">
+		<form name="form1">
+			<p>이름<br><input type="text" name="name" size="45"></p>
+			<hr>
+			<p>이메일<br><input type="text" name="email" size="45"></p>
+			<button type="button" onclick="signUp()">가입</button>
+		</form>
+	</div>
+	
+	<div id="result" class="result">
+		<h3>가입 정보</h3>
+		<hr>
+		<p>이름 : <span id="rname"></span><br></p>
+		<p>이메일 : <span id="remail"></span><br></p>
+	</div>
+	<script>
+		document.getElementById("result").style.display = "none";
+	</script>
+</body>
+</html>

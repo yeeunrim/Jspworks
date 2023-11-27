@@ -18,9 +18,14 @@ button{padding: 5px; font-size: 11px; font-family: 'Nanum Myeongjo', serif;
 #tbl_reg select{padding: 5px;}
 #tbl_reg tr td:nth-of-type(1){background-color: #ccc;}
 #tbl_reg tr td:last-child{background-color: white;}
+#btn input{padding: 5px; font-size: 11px; font-family: 'Nanum Myeongjo', serif; 
+	font-weight: bold; background-color: rgb(211, 211, 211);}
 
 /* addList.jsp */
 #container .accent{color: palevioletred;}
+#container #accent{text-decoration: none;}
+#container #accent:hover{text-decoration: line-through;}
+#container #accent:hover .accent{color: dimgray;}
 #tbl_list{width: 850px; margin: 0 auto;}
 #tbl_list, th, td{border: 1px solid darkgray; border-collapse: collapse; text-align: center;}
 #tbl_list td, td{padding: 10px;}
@@ -41,3 +46,12 @@ button{padding: 5px; font-size: 11px; font-family: 'Nanum Myeongjo', serif;
 #tbl_login select{padding: 5px;}
 #tbl_login tr td:nth-of-type(1){background-color: #ccc;}
 #tbl_login tr td:last-child{background-color: white;}
+#btn2 input{padding: 5px; font-size: 11px; font-family: 'Nanum Myeongjo', serif; 
+	font-weight: bold; background-color: rgb(211, 211, 211);}
+
+/* addrUpdate.jsp */
+#tbl_update{width: 400px; margin: 0 auto;}
+#tbl_update, tr, td{border: 1px solid darkgray; border-collapse: collapse; text-align: center;}
+#tbl_update tr td{padding: 10px;}
+#input_btn input{padding: 5px; font-size: 11px; font-family: 'Nanum Myeongjo', serif; 
+	font-weight: bold; background-color: rgb(211, 211, 211);}

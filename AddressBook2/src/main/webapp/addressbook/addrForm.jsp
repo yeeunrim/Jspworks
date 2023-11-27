@@ -40,7 +40,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td colspan="2" id="btn">
 						<input type="submit" value="Submit">
 						<input type="reset" value="Reset">
 					</td>

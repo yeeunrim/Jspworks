@@ -46,7 +46,7 @@
 			<tr>
 				<td colspan="2">
 					<%
-					String sessionId = (String)session.getAttribute("sessionID");
+					String sessionId = (String)session.getAttribute("sessionId");
 					if(sessionId.equals(addrBook.getEmail())){
 					%>
 					<a href="addrUpdate.jsp?bnum=<%=addrBook.getBnum() %>">

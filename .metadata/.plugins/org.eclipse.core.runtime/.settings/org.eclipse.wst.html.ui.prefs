@@ -1,8 +1,14 @@
 commentBorder=\#948168 | null | false | false | false | false
 commentText=\#948168 | null | false | false | false | false
 declBoder=\#999966 | null | false | false | false | false
+doctypeExternalId=\#cf96eb | null | false | false | false | false
+doctypeExternalPubref=\#f0a253 | null | false | false | false | false
+doctypeExtrenalSysref=\#fbd153 | null | false | false | false | false
+doctypeName=\#fea88f | null | false | false | false | false
 eclipse.preferences.version=1
 entityReference=\#6699cc | null | false | false | false | false
+newFileTemplateName=New HTML File (5)
+overriddenByCSS=,doctypeExternalId,doctypeExternalPubref,doctypeExtrenalSysref,doctypeName,
 tagAttributeEquals=\#ccffff | null | false | false | false | false
 tagAttributeName=\#f3ec79 | null | false | false | false | false
 tagAttributeValue=\#99cc99 | null | false | true | false | false

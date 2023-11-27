@@ -20,7 +20,7 @@
 		} else{
 			out.println("<script>");
 			out.println("alert('로그인을 해주세요.')");
-			out.println("loacation.href='loginForm.jsp'");
+			out.println("location.href='loginForm.jsp'");
 			out.println("</script>"); 
 		}
 	%>
@@ -28,8 +28,8 @@
 		<h2>Address List</h2>
 		<hr>
 		<p>
-			<a href="logout.jsp">
-				👤 <span class="accent"><%=sessionId %></span>님, [Logout]
+			<a href="logout.jsp" id="accent">
+				👤 <span class="accent"><%=session.getAttribute("sessionName")%></span>님 [Logout]
 			</a>
 		</p>
 		<table id="tbl_list">

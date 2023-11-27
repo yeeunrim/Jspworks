@@ -17,6 +17,6 @@
 
 	out.println("<script>");
 	out.println("alert('주소를 수정했습니다.')");
-	out.println("loacation.href='addrList.jsp'"); // 주소 목록 페이지
+	out.println("location.href='addrList.jsp'"); // 주소 목록 페이지
 	out.println("</script>"); 
 %>

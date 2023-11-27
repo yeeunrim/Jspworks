@@ -22,7 +22,7 @@
 						autofocus="autofocus" size="30" maxlength="30"></td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td colspan="2" id="btn2">
 						<input type="submit" value="Login">
 					</td>
 				</tr>

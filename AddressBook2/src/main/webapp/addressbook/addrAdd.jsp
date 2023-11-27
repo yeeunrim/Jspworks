@@ -17,6 +17,7 @@
 		abDAO.addAddrBook(addrBook); // 주소 추가
 		// 이름으로 세션을 발급함 - 세션 이름(sessionName)
 		session.setAttribute("sessionId", addrBook.getEmail());
+		session.setAttribute("sessionName", addrBook.getUsername());
 	%>
 
 	<div id="container">
