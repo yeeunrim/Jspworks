@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+/* common */
+#content{width: 80%; margin: 30px auto; text-align: center;}
+ul li{list-style: none;}
+
+/* index */
+#content h3 a{color: dimgray;}
+#content h3 a:hover{color: black; text-decoration: line-through;}
+
+/* studentlist */
+table, th, td{border: 1px solid #ccc; padding: 10px; border-collapse: collapse; margin: 20px auto;}
+#content p a{color: dimgray;}
+#content p a:hover{color: black; text-decoration: line-through;}
+
+/* studentform */
+form{width: 400px; margin: 20px auto; text-align: center; border: 2px solid #ccc;}
+ul li label{float: left; width: 80px;}
+ul li input .birth{width: 166px;}
+ul li label, ul li input{margin: 5px;}
+button{padding: 5px; font-size: 11px; font-family: 'Nanum Myeongjo', serif; 
+	font-weight: bold; background-color: rgb(211, 211, 211); margin: 0 10px 10px 10px;}
