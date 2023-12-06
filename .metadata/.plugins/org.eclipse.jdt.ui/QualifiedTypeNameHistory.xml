@@ -14,7 +14,8 @@
     <fullyQualifiedTypeName name="oracle.jdbc.driver.json.ErrorMessagesJson_pt_BR"/>
     <fullyQualifiedTypeName name="common.JDBCUtil"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="member.MemberDAO"/>
 </qualifiedTypeNameHistroy>

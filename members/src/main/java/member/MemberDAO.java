@@ -130,4 +130,31 @@ public class MemberDAO {
 		return false;
 	} // checkLogin() 끝
 	
-}
+	// ID 중복 검사
+	public boolean getDuplicatedId(String id){
+		boolean result = false;
+	
+		try {
+			conn = JDBCUtil.getConnection();
+			
+			String sql = "SELECT DECODE(COUNT(*), 1, 'true', 'false') AS result "
+					+ "FROM member WHERE id = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				// 별칭을 칼럼으로 db에서 데이터를 가져옴
+				result = rs.getBoolean("result");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return result;
+	}
+	
+} // DAO 클래스 끝

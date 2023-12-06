@@ -51,6 +51,7 @@ footer{height: 80px; border-top: 2px solid rgb(66, 66, 66); clear: both;}
 #join form ul li input{padding: 5px;}
 #join form ul li input[type="text"], #join form ul li input[type="password"]
 	{width: 200px; clear: both; float: right; margin-right: 70px;}
+#join form ul li input[type="button"]{float: right; padding: 7px; font-size: 12px; background-color: rgb(211, 211, 211);}
 #join form ul li input[type="radio"]{margin-right: 5px;}
 #join form ul li #gender_opt .check{margin-right: 10px;}
 #join form ul li #gender_opt{width: 200px; float: right; margin-right: 80px;}

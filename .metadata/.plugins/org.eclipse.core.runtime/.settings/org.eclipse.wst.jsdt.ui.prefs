@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 fontPropagated=true
+java_multi_line_comment=148,129,104
+java_single_line_comment=148,129,104
 org.eclipse.wst.jsdt.ui.editor.tab.width=
 org.eclipse.wst.jsdt.ui.formatterprofiles.version=11
 org.eclipse.wst.jsdt.ui.javadoclocations.migrated=true
