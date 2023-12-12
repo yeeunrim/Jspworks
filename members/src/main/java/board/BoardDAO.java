@@ -26,7 +26,7 @@ public class BoardDAO {
 			conn = JDBCUtil.getConnection();
 			
 			// sql 처리
-			String sql = "SELECT * FROM board ORDER BY createdate DESC";
+			String sql = "SELECT * FROM board ORDER BY bno DESC";
 			pstmt = conn.prepareStatement(sql);
 			
 			// sql 실행
@@ -151,5 +151,160 @@ public class BoardDAO {
 			JDBCUtil.close(conn, pstmt);
 		}
 	} // updateboard() 끝
+	
+	// 게시글 목록 - 메서드 오버로딩 (페이지 처리)
+	public List<Board> getBoardList(int page){
+		List<Board> boardList = new ArrayList<>();
+		
+		try {
+			// db 연결
+			conn = JDBCUtil.getConnection();
+			
+			// sql 처리
+			String sql = "SELECT * "
+					+ "FROM (SELECT ROWNUM RN, bo.* "
+					+ "FROM (SELECT * FROM board ORDER BY bno DESC) bo) "
+					+ "WHERE RN >= ? AND RN <= ?"; 
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, (page - 1) * 10 + 1); // 시작행
+			pstmt.setInt(2, page * 10); // 페이지 당 게시글 끝 번호
+			
+			// sql 실행
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Board b = new Board();
+				b.setBno(rs.getInt("bno"));
+				b.setTitle(rs.getString("title"));
+				b.setContent(rs.getString("content"));
+				b.setCreateDate(rs.getTimestamp("createdate"));
+				b.setModifyDate(rs.getTimestamp("modifydate"));
+				b.setHit(rs.getInt("hit"));
+				b.setFilename(rs.getString("filename"));
+				b.setId(rs.getString("id"));
+				
+				// 리스트에 회원을 추가
+				boardList.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { // db 종료
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return boardList;
+	} // getBoardList(int page) 끝
+	
+	// 총 게시글 수
+	public int getBoardCount() {
+		int total = 0;
+		
+		try {
+			// db 연결
+			conn = JDBCUtil.getConnection();
+			
+			// sql 처리
+			String sql = "SELECT COUNT(*) AS total FROM board"; 
+			pstmt = conn.prepareStatement(sql);
+			
+			// sql 실행
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt("total"); // 별칭 사용
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { // db 종료
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return total;
+	} // getBoardCount() 끝
+	
+	// 게시글 목록 검색 처리 - 메서드 오버로딩
+	public List<Board> getBoardList(String field, String kw){
+		List<Board> boardList = new ArrayList<>();
+		
+		try {
+			// db 연결
+			conn = JDBCUtil.getConnection();
+			
+			// sql 처리 : field에 title / id가 입력됨
+			String sql = "SELECT * FROM board "
+					+ "WHERE " + field + " LIKE ? ORDER BY bno DESC";  
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "%" + kw + "%");
+			
+			// sql 실행
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Board b = new Board();
+				b.setBno(rs.getInt("bno"));
+				b.setTitle(rs.getString("title"));
+				b.setContent(rs.getString("content"));
+				b.setCreateDate(rs.getTimestamp("createdate"));
+				b.setModifyDate(rs.getTimestamp("modifydate"));
+				b.setHit(rs.getInt("hit"));
+				b.setFilename(rs.getString("filename"));
+				b.setId(rs.getString("id"));
+				
+				// 리스트에 회원을 추가
+				boardList.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { // db 종료
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return boardList;
+	} // getBoardList(int page) 끝
+	
+	// 게시글 목록 페이지, 검색 처리 - 메서드 오버로딩
+	public List<Board> getBoardList(String field, String kw, int page){
+		List<Board> boardList = new ArrayList<>();
+		
+		try {
+			// db 연결
+			conn = JDBCUtil.getConnection();
+			
+			// sql 처리 : field에 title / id가 입력됨
+			String sql = "SELECT * "
+					+ "FROM (SELECT ROWNUM RN, bo.* "
+					+ "FROM (SELECT * FROM board "
+					+ "WHERE " + field + " LIKE ? ORDER BY bno DESC) bo) "
+					+ "WHERE RN >= ? AND RN <= ?";  
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "%" + kw + "%");
+			pstmt.setInt(2, (page - 1) * 10 + 1);
+			pstmt.setInt(3, page * 10);
+			
+			// sql 실행
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Board b = new Board();
+				b.setBno(rs.getInt("bno"));
+				b.setTitle(rs.getString("title"));
+				b.setContent(rs.getString("content"));
+				b.setCreateDate(rs.getTimestamp("createdate"));
+				b.setModifyDate(rs.getTimestamp("modifydate"));
+				b.setHit(rs.getInt("hit"));
+				b.setFilename(rs.getString("filename"));
+				b.setId(rs.getString("id"));
+				
+				// 리스트에 회원을 추가
+				boardList.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { // db 종료
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return boardList;
+	} // getBoardList(int page) 끝
 
 }

@@ -86,8 +86,10 @@ background-color: rgb(211, 211, 211); margin: 0; box-sizing: border-box;}
 
 /* boardlist */
 #boardlist h2{margin: 30px;}
+.pagination a{margin: 5px; color: black;}
+.pagination a:hover{text-decoration: underline;}
 #list_btn button{padding: 10px 30px; font-size: 11px; font-weight: bold;
-	background-color: rgb(211, 211, 211);}
+	background-color: rgb(211, 211, 211); margin-top: 10px;}
 	
 /* writeform */
 #writeform{margin: 20px auto;}

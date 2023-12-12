@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+*{margin: 0; padding: 0px;}
+#container{width: 400px; margin: 20px auto;}
+
+#joinform{width: 330px; margin: 10px auto;}
+#joinform ul li{list-style: none; margin: 10px;}
+#joinform ul li input{width: 180px; clear: both; float: right;}
+
+.btn button{clear: both; padding: 6px; font-size: 14px; margin: 5px 0 5px 0;} 
