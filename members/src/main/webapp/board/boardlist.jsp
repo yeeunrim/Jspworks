@@ -11,6 +11,7 @@
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
+	
 	<div id="container">
 		<section id="boardlist">
 			<h2>게시글 목록</h2>
@@ -25,6 +26,7 @@
 				<button type="submit">검색</button>
 			</form>
 			
+			<!-- 글 목록 -->
 			<table id="tbl_list">
 				<thead>
 					<tr>
@@ -98,6 +100,7 @@
 			</div>
 		</section>
 	</div>
+	
 	<jsp:include page="../footer.jsp" />
 </body>
 </html>

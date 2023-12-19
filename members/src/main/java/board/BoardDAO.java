@@ -136,6 +136,31 @@ public class BoardDAO {
 			//db 연결
 			conn = JDBCUtil.getConnection();
 			//sql 처리 : 수정일 처리는 현재 날짜와 시간을 입력함
+			String sql = "UPDATE board SET title = ?, content = ?, modifydate = ?, filename = ? "
+					+ "WHERE bno = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b.getTitle());
+			pstmt.setString(2, b.getContent());
+			pstmt.setTimestamp(3, now);
+			pstmt.setString(4, b.getFilename());
+			pstmt.setInt(5, b.getBno());
+			//sql 실행
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt);
+		}
+	} // updateboard() 끝
+	
+	// 파일이 없는 경우 - 게시글 수정
+	public void updateboardNoFile(Board b) {
+		//현재 날짜와 시간 객체 생성
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		try {
+			//db 연결
+			conn = JDBCUtil.getConnection();
+			//sql 처리 : 수정일 처리는 현재 날짜와 시간을 입력함
 			String sql = "UPDATE board SET title = ?, content = ?, modifydate = ? "
 					+ "WHERE bno = ?";
 			pstmt = conn.prepareStatement(sql);

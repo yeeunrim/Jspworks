@@ -10,11 +10,21 @@
 <link rel="stylesheet" href="../resources/css/style.css">
 </head>
 <body>
+	<!-- 로그인한 사용자만 글쓰기 허용됨 -->
+	<c:if test="${empty sessionId}">
+		<script type="text/javascript">
+			alert("로그인이 필요합니다.");
+			location.href = "/loginform.do";
+		</script>
+	
+	</c:if>
+	
 	<jsp:include page="../header.jsp" />
+	
 	<div id="container">
 		<section id="writeform">
 			<h2>게시글 작성</h2>
-			<form action="/write.do" method="post">
+			<form action="/write.do" method="post" enctype="multipart/form-data">
 				<table id="tbl_write">
 					<tr>
 						<td>
@@ -28,6 +38,9 @@
 						</td>
 					</tr>
 					<tr>
+						<td><input type="file" name="filename"></td>
+					</tr>
+					<tr>
 						<td>
 							<div id="write_btn">
 								<button type="submit">게시</button>
@@ -39,6 +52,7 @@
 			</form>
 		</section>
 	</div>
+	
 	<jsp:include page="../footer.jsp" />
 </body>
 </html>

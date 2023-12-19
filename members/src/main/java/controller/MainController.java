@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,12 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import board.Board;
 import board.BoardDAO;
 import member.Member;
 import member.MemberDAO;
 import reply.Reply;
 import reply.ReplyDAO;
+import voter.Voter;
+import voter.VoterDAO;
 
 @WebServlet("*.do") // '/'이하의 경로에서 do로 끝나면 모두 허용
 public class MainController extends HttpServlet {
@@ -27,23 +34,29 @@ public class MainController extends HttpServlet {
 	MemberDAO mDAO;
 	BoardDAO bDAO;
 	ReplyDAO rDAO;
+	VoterDAO vDAO;
  
     public MainController() {
     	// MainController가 실행될 때마다 계속 생성 (생성자)
         mDAO = new MemberDAO();
         bDAO = new BoardDAO();
         rDAO = new ReplyDAO();
+        vDAO = new VoterDAO();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 한글 인코딩
 		request.setCharacterEncoding("utf-8");
 		// 컨첵츠 유형
 		response.setContentType("text/html; charset=utf-8");
+		
+		String contentType = request.getContentType();
+		System.out.println("Content-Type: " + contentType);
 		
 		// 경로 설정
 		// uri = context(/) + 파일 경로 (.do)
@@ -60,7 +73,7 @@ public class MainController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// view에 출력 객체 생성
-		// PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter();
 		
 		// 회원
 		if(command.equals("/main.do")) {
@@ -131,33 +144,22 @@ public class MainController extends HttpServlet {
 			m.setPasswd(passwd);
 			
 			// 로그인 인증
-			boolean result = mDAO.checkLogin(m);
-			if(result) { // result가 true이면 세션 발급
-				session.setAttribute("sessionId", id);
-				
-				// 로그인 후 페이지 이동
+			Member member = mDAO.checkLogin(m);
+			String name = member.getName();
+			if(name != null) { //result가 true이면 세션 발급
+				session.setAttribute("sessionId", id);  //아이디 세션발급
+				session.setAttribute("sessionName", name); //이름 세션 발급
+				//로그인 후 페이지 이동
 				nextPage = "/index.jsp";
-			} else {
-				// 에러를 모델로 보내기
+			}else {
+				//에러를 모델로 보내기
 				String error = "아이디나 비밀번호를 다시 확인해주세요.";
 				request.setAttribute("error", error);
-				// 에러 발생 후 페이지 이동
-				nextPage = "/member/loginform.jsp";
-				
-				// 에러 알림창 띄움
-				/* 
-				out.println("<script>");
-				out.println("alert('아이디나 비밀번호를 확인해주세요.')");
-				out.println("history.go(-1)");
-				out.println("</script>");
-				
-				return;
-				*/
-			}
-		} 
-		else if(command.equals("/logout.do")) {
-			session.invalidate();
-			
+				//에러 발생후 페이지 이동
+				nextPage ="/member/loginform.jsp";
+			}	
+		}else if(command.equals("/logout.do")) {
+			session.invalidate(); //모든 세션 삭제
 			nextPage = "/index.jsp";
 		}
 		
@@ -226,26 +228,59 @@ public class MainController extends HttpServlet {
 		} else if(command.equals("/writeform.do")) {
 			nextPage = "/board/writeform.jsp";
 		} else if(command.equals("/write.do")) {
-			// 폼 데이터 받기
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
+			String realFolder = "Users/rim-yeeun/eclipse/jspworks/members/src/main/webapp/upload";
+			int maxSize = 10*1024*1024;  //10MB
+			String encType = "utf-8";    //파일이름 한글 인코딩
+			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 			
-			// 세션 가져오기
+			//5가지 인자
+			MultipartRequest multi = new MultipartRequest(request, realFolder, 
+								maxSize, encType, policy); 
+			
+			//폼 일반 속성 데이터 받기
+			String title = multi.getParameter("title");
+			String content = multi.getParameter("content");
+			//세션 가져오기
 			String id = (String)session.getAttribute("sessionId");
+
+			//file 파라미터 추출
+			Enumeration<?> files = multi.getFileNames();
+			String filename = "";
+			while(files.hasMoreElements()) { //파일이름이 있는 동안 반복
+				String userFilename = (String)files.nextElement(); 
+				
+				//실제 저장될 이름
+				filename = multi.getFilesystemName(userFilename);
+			}
 			
-			// db에 저장
+			//db에 저장
 			Board b = new Board();
 			b.setTitle(title);
 			b.setContent(content);
+			b.setFilename(filename);
 			b.setId(id);
-			
-			// write 메서드 실행
+			//write 메서드 실행
 			bDAO.write(b);
 		} else if(command.equals("/boardview.do")) {
-			//글제목에서 요청한 글 번호 받기
+			// 글제목에서 요청한 글 번호 받기
 			int bno =  Integer.parseInt(request.getParameter("bno"));
-			//글 상세보기 처리
+			// 글 상세보기 처리
 			Board board = bDAO.getBoard(bno);
+			// 세션 아이디 가져오기
+			String id = (String)session.getAttribute("sessionId");
+			
+			// 좋아요 개수 - 해당 게시글의 총 개수를 출력
+			int voteCount = vDAO.voteCount(bno);
+			System.out.println("좋아요 수 :  " + voteCount);
+			
+			// 하트의 상태 바꾸기
+			boolean sw = false;
+			int result = vDAO.checkVoter(bno, id); // 게시글 번호, 세션 아이디
+			if(result == 0) {
+				sw = true;
+			} else {
+				sw = false;
+			}
 			
 			//댓글 목록 보기
 			List<Reply> replyList = rDAO.getReplyList(bno);
@@ -253,6 +288,8 @@ public class MainController extends HttpServlet {
 			//모델 생성해서 뷰로 보내기
 			request.setAttribute("board", board);
 			request.setAttribute("replyList", replyList);
+			request.setAttribute("voteCount", voteCount); // 좋아요 수
+			request.setAttribute("sw", sw);
 			
 			nextPage = "/board/boardview.jsp";
 		} else if(command.equals("/deleteboard.do")) {
@@ -271,20 +308,67 @@ public class MainController extends HttpServlet {
 			
 			nextPage = "/board/updateBoardform.jsp";
 		} else if(command.equals("/updateboard.do")) {
-			//게시글 제목, 내용을 파라미터로 받음
-			int bno =  Integer.parseInt(request.getParameter("bno"));
+			String realFolder = "/Users/rim-yeeun/eclipse/jspworks/members/src/main/webapp/upload";
+			int maxSize = 10*1024*1024;  //10MB
+			String encType = "utf-8";    //파일이름 한글 인코딩
+			
+			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
+			
+			//5가지 인자
+			MultipartRequest multi = new MultipartRequest(request, realFolder, 
+								maxSize, encType, policy); 
+			
+			// 폼 일반 속성 데이터 받기
+			int bno = Integer.parseInt(multi.getParameter("bno"));
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
+		
+			//file 파라미터 추출
+			Enumeration<?> files = multi.getFileNames();
+			String filename = "";
+			while(files.hasMoreElements()) { //파일이름이 있는 동안 반복
+				String userFilename = (String)files.nextElement(); 
+				
+				//실제 저장될 이름
+				filename = multi.getFilesystemName(userFilename);
+			}
 			
-			//수정 처리 메서드
+			// db에 저장
 			Board b = new Board();
 			b.setTitle(title);
 			b.setContent(content);
+			b.setFilename(filename);
 			b.setBno(bno);
 			
-			bDAO.updateboard(b);
+			// 파일 유무에 따른 처리
+			if(filename != null) {
+				bDAO.updateboard(b);				
+			} else {
+				bDAO.updateboardNoFile(b);
+			}
 			
 			//nextPage = "/boardlist.do";
+		} else if(command.equals("/like.do")) {
+			int bno = Integer.parseInt(request.getParameter("bno"));
+			String id = request.getParameter("id");
+			
+			// 좋아요 추가
+			Voter voter = new Voter();
+			voter.setBno(bno);
+			voter.setMid(id);
+			
+			// 좋아요 저장 유무 체크
+			int result = vDAO.checkVoter(bno, id);
+			if(result == 0) { // db에 없으면 (저장 안됨)
+				vDAO.insertVote(voter); // 좋아요 추가
+			} else {
+				vDAO.deleteVote(voter); // 좋아요 삭제
+			}
+			
+			
+			
+			// 좋아요 삭제
+			
 		}
 		
 		//댓글 구현
@@ -311,7 +395,7 @@ public class MainController extends HttpServlet {
 		//새로고침하면 게시글, 댓글 중복 생성 문제 해결
 		if(command.equals("/write.do") || command.equals("/updateboard.do")) {
 			response.sendRedirect("/boardlist.do");
-		} else if(command.equals("/insertreply.do") || command.equals("/deletereply.do")) {
+		} else if(command.equals("/insertreply.do") || command.equals("/deletereply.do") || command.equals("/like.do")) {
 			int bno =  Integer.parseInt(request.getParameter("bno"));
 			response.sendRedirect("/boardview.do?bno=" + bno);
 		} else {

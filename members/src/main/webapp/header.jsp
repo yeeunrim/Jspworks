@@ -19,7 +19,7 @@
 			</c:when>
 			<c:otherwise >
 				<ul id="topMenu">
-					<li><a href="/logout.do">${sessionId}님, 로그아웃</a></li>
+					<li><a href="/logout.do">${sessionName}님, 로그아웃</a></li>
 					<li><a href="/memberview.do?id=${sessionId}">나의 정보</a></li>
 					<li><a href="boardlist.do">게시판</a></li>
 					<li><a href="/memberlist.do">회원 목록</a></li>
