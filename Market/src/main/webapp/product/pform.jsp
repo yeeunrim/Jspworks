@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Web Market | Product Registration</title>
-<style>
-.form-check-input:checked {background-color: dimgray; border-color: dimgray;}
-</style>
+<script src="../resources/js/validation.js"></script>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
@@ -16,23 +14,23 @@
 		<h2 class="my-3">Product Reg.</h2>
 		
 		<div class="row">
-			<form action="/insertproduct.do" method="post" enctype="multipart/form-data"> 
+			<form action="/insertproduct.do" method="post" enctype="multipart/form-data" name="newProduct"> 
 				<div class="form-group row my-3">
 					<label class="col-2">상품 코드</label>
 					<div class="col-3">
-						<input type="text" name="pid" class="form-control">
+						<input type="text" id="pid" name="pid" class="form-control" placeholder="ex) P0001, P0002">
 					</div>
 				</div>
 				<div class="form-group row my-3">
 					<label class="col-2">상품 이름</label>
 					<div class="col-3">
-						<input type="text" name="pname" class="form-control">
+						<input type="text" id="pname" name="pname" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row my-3">
 					<label class="col-2">상품 가격</label>
 					<div class="col-3">
-						<input type="text" name="price" class="form-control">
+						<input type="text" id="price" name="price" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row my-3">
@@ -50,7 +48,7 @@
 				<div class="form-group row my-3">
 					<label class="col-2">상품 재고</label>
 					<div class="col-3">
-						<input type="text" name="pstock" class="form-control">
+						<input type="text" id="pstock" name="pstock" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row my-3">
@@ -68,7 +66,7 @@
 				</div>
 				<div class="form-group row my-3">
 					<div class="col-3">
-						<input type="submit" value="등록" class="btn btn-secondary">
+						<input type="button" value="등록" class="btn btn-secondary" onclick="checkProduct()">
 					</div>
 				</div>
 			</form>

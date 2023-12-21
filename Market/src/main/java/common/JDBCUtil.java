@@ -1,29 +1,27 @@
 package common;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 // db에 연결하고 종료하는 클래스
 public class JDBCUtil {
 	
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	
-	static String driverClass = "com.mysql.cj.jdbc.Driver";
-	static String url = "jdbc:mysql://localhost:3306/jwebdb?serverTime=Asia/Seoul";
-	
-	static String user = "jweb";
-	static String password = "pwjweb";
+	// db 연결 및 sql 처리 필드
+	static Connection conn = null;
+	static PreparedStatement pstmt = null;
+	static ResultSet rs = null;
 	
 	// 연결 메서드
 	public static Connection getConnection() {
 		try {
-			Class.forName(driverClass);
-			return DriverManager.getConnection(url, user, password);
+			InitialContext ctx = new InitialContext();
+			DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/mysql");
+			conn = ds.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -24,5 +24,6 @@ public class Product implements Serializable{
 	private String pimage;
 	private Timestamp regDate;
 	private Timestamp updateDate;
+	private int quantity; // 장바구니 품목 수량
 	
 } 

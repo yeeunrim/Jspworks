@@ -26,4 +26,16 @@
     <!--
     <Manager pathname="" />
     -->
+    
+    <!-- Connection Pool 설정 -->
+    <Resource 
+    	name="jdbc/mysql" 
+        type="javax.sql.DataSource" 
+        driverClassName="com.mysql.cj.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/jwebdb?serverTime=Asia/Seoul"
+        username="jweb" 
+        password="pwjweb" 
+        maxActive="100" 
+        maxWait="1" />
+
 </Context>
