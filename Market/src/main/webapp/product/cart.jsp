@@ -30,7 +30,7 @@
 				<tbody>
 					<c:forEach items="${cartlist}" var="product">
 						<tr>
-							<td><span class="badge bg-dark">${product.pid}</span> ${product.pname}</td>
+							<td><span class="badge bg-light text-dark">${product.pid}</span> ${product.pname}</td>
 							<td><fmt:formatNumber value="${product.price}" pattern="#,##0"/></td>
 							<td>${product.quantity}</td>
 							<td>
@@ -59,11 +59,11 @@
 			<table>
 				<tr>
 					<td align="left">
-						<a href="/deletecart.do" class="btn btn-secondary btn-sm">전체 상품 삭제</a>
+						<a href="/deletecart.do" class="btn btn-secondary btn-sm bg-dark bg-gradient">전체 상품 삭제</a>
 					</td>
 					<td align="right">
 						<!-- 장바구니 주문이므로 카트아이디를 전달해줌 -->
-						<a href="/shippingform.do?cartId=${cartId}" class="btn btn-secondary btn-sm">전체 상품 주문</a>
+						<a href="/shippingform.do?cartId=${cartId}" class="btn btn-secondary btn-sm bg-dark bg-gradient">전체 상품 주문</a>
 					</td>
 				</tr>
 			</table>

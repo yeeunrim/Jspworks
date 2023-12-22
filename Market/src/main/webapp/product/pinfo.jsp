@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Web Market | Product Info</title>
+<title>Web Market | Product Detail</title>
 <script src="https://kit.fontawesome.com/aa24b12773.js" crossorigin="anonymous"></script>
 <script>
 	let addToCart = function(){
@@ -21,7 +21,7 @@
 <body>
 	<jsp:include page="../header.jsp" />
 	<div class="container">
-		<h2 class="my-3">Product Info.</h2>
+		<h2 class="my-3">Product Detail</h2>
 		
 		<div class="row">
 			<div class="col-5">

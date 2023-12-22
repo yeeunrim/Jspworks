@@ -66,7 +66,7 @@
 				</div>
 				<div class="form-group row my-3">
 					<div class="col-3">
-						<input type="button" value="등록" class="btn btn-secondary" onclick="checkProduct()">
+						<input type="button" value="등록" class="btn btn-secondary bg-dark bg-gradient" onclick="checkProduct()">
 					</div>
 				</div>
 			</form>

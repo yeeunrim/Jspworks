@@ -24,35 +24,38 @@ public class ProductDAO {
 			// DB 연동
 			conn = JDBCUtil.getConnection();
 			
-			// SQL 처리
-			String sql = "select * from product";
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				Product p = new Product();
+			if(conn != null) {
+				// SQL 처리
+				String sql = "select * from product";
+				pstmt = conn.prepareStatement(sql);
 				
-				p.setPno(rs.getInt("p_no"));
-				p.setPid(rs.getString("p_id"));
-				p.setPname(rs.getString("p_name"));
-				p.setPrice(rs.getInt("p_price"));
-				p.setDescription(rs.getString("p_description"));
-				p.setCategory(rs.getString("p_category"));
-				p.setPstock(rs.getLong("p_stock"));
-				p.setCondition(rs.getString("p_condition"));
-				p.setPimage(rs.getString("p_image"));
-				p.setRegDate(rs.getTimestamp("regdate"));
-				p.setUpdateDate(rs.getTimestamp("updatedate"));
+				rs = pstmt.executeQuery();
 				
-				// 리스트에 객체 저장
-				productList.add(p);
+				while(rs.next()) {
+					Product p = new Product();
+					
+					p.setPno(rs.getInt("p_no"));
+					p.setPid(rs.getString("p_id"));
+					p.setPname(rs.getString("p_name"));
+					p.setPrice(rs.getInt("p_price"));
+					p.setDescription(rs.getString("p_description"));
+					p.setCategory(rs.getString("p_category"));
+					p.setPstock(rs.getLong("p_stock"));
+					p.setCondition(rs.getString("p_condition"));
+					p.setPimage(rs.getString("p_image"));
+					p.setRegDate(rs.getTimestamp("regdate"));
+					p.setUpdateDate(rs.getTimestamp("updatedate"));
+					
+					// 리스트에 객체 저장
+					productList.add(p);
+				}
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			// DB 종료
-			JDBCUtil.close(conn, pstmt, rs);			
+			JDBCUtil.close(conn, pstmt, rs);		
 		}
 		
 		return productList;
@@ -66,27 +69,29 @@ public class ProductDAO {
 			// DB 연동
 			conn = JDBCUtil.getConnection();
 			
-			// SQL 처리
-			String sql = "insert into product(p_id, p_name, p_price, p_description, "
-					+ "p_category, p_stock, p_condition, p_image) "
-					+ "values (?, ?, ?, ?, ?, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, p.getPid());
-			pstmt.setString(2, p.getPname());
-			pstmt.setInt(3, p.getPrice());
-			pstmt.setString(4, p.getDescription());
-			pstmt.setString(5, p.getCategory());
-			pstmt.setLong(6, p.getPstock());
-			pstmt.setString(7, p.getCondition());
-			pstmt.setString(8, p.getPimage());
-			
-			pstmt.executeUpdate();
+			if(conn != null) {
+				// SQL 처리
+				String sql = "insert into product(p_id, p_name, p_price, p_description, "
+						+ "p_category, p_stock, p_condition, p_image) "
+						+ "values (?, ?, ?, ?, ?, ?, ?, ?)";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, p.getPid());
+				pstmt.setString(2, p.getPname());
+				pstmt.setInt(3, p.getPrice());
+				pstmt.setString(4, p.getDescription());
+				pstmt.setString(5, p.getCategory());
+				pstmt.setLong(6, p.getPstock());
+				pstmt.setString(7, p.getCondition());
+				pstmt.setString(8, p.getPimage());
+				
+				pstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			// DB 종료
-			JDBCUtil.close(conn, pstmt);			
+			JDBCUtil.close(conn, pstmt);		
 		}
 		
 	} // insertproduct() 끝
@@ -100,28 +105,30 @@ public class ProductDAO {
 			// DB 연동
 			conn = JDBCUtil.getConnection();
 			
-			// SQL 처리
-			String sql = "select * from product where p_id = ?";
-			pstmt = conn.prepareStatement(sql);
-		
-			pstmt.setString(1, pid);
+			if(conn != null) {
+				// SQL 처리
+				String sql = "select * from product where p_id = ?";
+				pstmt = conn.prepareStatement(sql);
 			
-			// sql 검색 처리
-			rs = pstmt.executeQuery();
-			
-			// 레코드 추출
-			if(rs.next()) {
-				p.setPno(rs.getInt("p_no"));
-				p.setPid(rs.getString("p_id"));
-				p.setPname(rs.getString("p_name"));
-				p.setPrice(rs.getInt("p_price"));
-				p.setDescription(rs.getString("p_description"));
-				p.setCategory(rs.getString("p_category"));
-				p.setPstock(rs.getLong("p_stock"));
-				p.setCondition(rs.getString("p_condition"));
-				p.setPimage(rs.getString("p_image"));
-				p.setRegDate(rs.getTimestamp("regdate"));
-				p.setUpdateDate(rs.getTimestamp("updatedate"));
+				pstmt.setString(1, pid);
+				
+				// sql 검색 처리
+				rs = pstmt.executeQuery();
+				
+				// 레코드 추출
+				if(rs.next()) {
+					p.setPno(rs.getInt("p_no"));
+					p.setPid(rs.getString("p_id"));
+					p.setPname(rs.getString("p_name"));
+					p.setPrice(rs.getInt("p_price"));
+					p.setDescription(rs.getString("p_description"));
+					p.setCategory(rs.getString("p_category"));
+					p.setPstock(rs.getLong("p_stock"));
+					p.setCondition(rs.getString("p_condition"));
+					p.setPimage(rs.getString("p_image"));
+					p.setRegDate(rs.getTimestamp("regdate"));
+					p.setUpdateDate(rs.getTimestamp("updatedate"));
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -140,13 +147,15 @@ public class ProductDAO {
 			// DB 연동
 			conn = JDBCUtil.getConnection();
 			
-			// SQL 처리
-			String sql = "delete from product where p_id = ?";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, pid);
-			
-			pstmt.executeUpdate();
+			if(conn != null) {
+				// SQL 처리
+				String sql = "delete from product where p_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, pid);
+				
+				pstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -163,20 +172,22 @@ public class ProductDAO {
 			// DB 연동
 			conn = JDBCUtil.getConnection();
 			
-			// SQL 처리
-			String sql = "update product set p_name = ?, p_price = ?, p_description = ?, p_category = ?, p_stock = ?, p_condition = ?, p_image = ? where p_id = ?";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, p.getPname());
-			pstmt.setInt(2, p.getPrice());
-			pstmt.setString(3, p.getDescription());
-			pstmt.setString(4, p.getCategory());
-			pstmt.setLong(5, p.getPstock());
-			pstmt.setString(6, p.getCondition());
-			pstmt.setString(7, p.getPimage());
-			pstmt.setString(8, p.getPid());
-			
-			pstmt.executeUpdate();
+			if(conn != null) {
+				// SQL 처리
+				String sql = "update product set p_name = ?, p_price = ?, p_description = ?, p_category = ?, p_stock = ?, p_condition = ?, p_image = ? where p_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, p.getPname());
+				pstmt.setInt(2, p.getPrice());
+				pstmt.setString(3, p.getDescription());
+				pstmt.setString(4, p.getCategory());
+				pstmt.setLong(5, p.getPstock());
+				pstmt.setString(6, p.getCondition());
+				pstmt.setString(7, p.getPimage());
+				pstmt.setString(8, p.getPid());
+				
+				pstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -193,19 +204,21 @@ public class ProductDAO {
 				// DB 연동
 				conn = JDBCUtil.getConnection();
 				
-				// SQL 처리
-				String sql = "update product set p_name = ?, p_price = ?, p_description = ?, p_category = ?, p_stock = ?, p_condition = ? where p_id = ?";
-				pstmt = conn.prepareStatement(sql);
-				
-				pstmt.setString(1, p.getPname());
-				pstmt.setInt(2, p.getPrice());
-				pstmt.setString(3, p.getDescription());
-				pstmt.setString(4, p.getCategory());
-				pstmt.setLong(5, p.getPstock());
-				pstmt.setString(6, p.getCondition());
-				pstmt.setString(7, p.getPid());
-				
-				pstmt.executeUpdate();
+				if(conn != null) {
+					// SQL 처리
+					String sql = "update product set p_name = ?, p_price = ?, p_description = ?, p_category = ?, p_stock = ?, p_condition = ? where p_id = ?";
+					pstmt = conn.prepareStatement(sql);
+					
+					pstmt.setString(1, p.getPname());
+					pstmt.setInt(2, p.getPrice());
+					pstmt.setString(3, p.getDescription());
+					pstmt.setString(4, p.getCategory());
+					pstmt.setLong(5, p.getPstock());
+					pstmt.setString(6, p.getCondition());
+					pstmt.setString(7, p.getPid());
+					
+					pstmt.executeUpdate();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {

@@ -15,6 +15,7 @@
 		
 		<div class="row">
 			<form action="/shippinginfo.do" method="post"> 
+				<input type="hidden" name="cartId" value="${cartId}">
 				<div class="form-group row my-3">
 					<label class="col-2">성명</label>
 					<div class="col-3">
@@ -24,7 +25,7 @@
 				<div class="form-group row my-3">
 					<label class="col-2">배송일</label>
 					<div class="col-3">
-						<input type="text" name="shippingdate" class="form-control">
+						<input type="text" name="shippingdate" class="form-control" placeholder="ex) YYYY/MM/DD">
 					</div>
 				</div>
 				<div class="form-group row my-3">
@@ -42,7 +43,7 @@
 				</div>
 				<div class="form-group row my-3">
 					<div class="col-3">
-						<input type="submit" value="등록" class="btn btn-secondary">
+						<input type="submit" value="등록" class="btn btn-secondary bg-dark bg-gradient">
 					</div>
 				</div>
 			</form>
